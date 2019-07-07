@@ -59,21 +59,11 @@
 }
 
 /* Borders */
-/* Each element will handle the top and left border */
+/* All elements have a 1px border and a 1px margin */
+/* FIXME: How do I make this look right without the margin? */
 .element {
-  border-top: 1px solid black;
-  border-left: 1px solid black;
-}
-/* The hints and picture will handle the bottom and right */
-#column-hints {
-  border-right: 1px solid black;
-}
-#row-hints {
-  border-bottom: 1px solid black;
-}
-#picture {
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
+  margin: 1px;
+  border: 1px solid black;
 }
 
 /* Hovering over an element changes the background */
