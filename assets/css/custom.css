@@ -1,4 +1,4 @@
-/* Top-level grid layout */
+/* Top-level puzzle layout */
 #puzzle {
   display: grid;
   grid-template: "        . column-hints" max-content
