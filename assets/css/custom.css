@@ -1,3 +1,42 @@
 h1 {
   color: red;
 }
+
+/* Grid layout */
+#puzzle {
+  display: grid;
+  grid-template-areas: ". a"
+                       "b c";
+  grid-template-rows: auto auto;
+  grid-template-columns: auto auto;
+}
+
+#column-hints {
+  grid-area: a;
+}
+
+#row-hints {
+  grid-area: b;
+}
+
+#puzzle-grid {
+  grid-area: c;
+}
+
+/* Puzzle element styles */
+
+#puzzle div {
+  margin: 1px;
+  border: 1px solid black;
+
+}
+
+.hint {
+  font-size: 12px;
+  text-align: center;
+}
+
+.grid-box {
+  width: 15px;
+  height: 15px;
+}

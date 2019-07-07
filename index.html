@@ -8,10 +8,30 @@
 
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="assets/css/custom.css">
-  
+
 </head>
 <body>
   <h1>Nonogram Solver</h1>
+
+  <h3>Puzzle Size:</h3>
+  <form action="get">
+    <input type="text" id="x-dimension"> x <input type="text" id="y-dimension">
+    <button>Create!</button>
+  </form>
+
+  <h3>Puzzle:</h3>
+  <div id="puzzle">
+    <!-- <div id="empty"></div> -->
+    <div id="column-hints">
+      <div class="hint">1</div>
+    </div>
+    <div id="row-hints">
+      <div class="hint">1</div>
+    </div>
+    <div id="puzzle-grid">
+      <div class="grid-box"></div>
+    </div>
+  </div>
 
   <!-- JavaScript -->
   <script type="text/javascript" src="assets/javascript/nonogram_solver.js"></script>
