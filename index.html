@@ -7,6 +7,7 @@
   <title>Nonogram Solver</title>
 
   <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
   <link rel="stylesheet" href="assets/css/custom.css">
 
 </head>
@@ -21,15 +22,35 @@
 
   <h3>Puzzle:</h3>
   <div id="puzzle">
-    <!-- <div id="empty"></div> -->
-    <div id="column-hints">
-      <div class="hint">1</div>
+    <div id="column-hints" class="hints">
+      <div class="hint-group">
+        <div class="element">1</div>
+        <div class="element">2</div>
+      </div>
+      <div class="hint-group">
+        <div class="element">1</div>
+        <div class="element">2</div>
+      </div>
     </div>
-    <div id="row-hints">
-      <div class="hint">1</div>
+    <div id="row-hints" class="hints">
+      <div class="hint-group">
+        <div class="element">1</div>
+        <div class="element">2</div>
+      </div>
+      <div class="hint-group">
+        <div class="element">1</div>
+        <div class="element">2</div>
+      </div>
     </div>
-    <div id="puzzle-grid">
-      <div class="grid-box"></div>
+    <div id="picture">
+      <div class="picture-row">
+        <div class="element"></div>
+        <div class="element"></div>
+      </div>
+      <div class="picture-row">
+        <div class="element"></div>
+        <div class="element"></div>
+      </div>
     </div>
   </div>
 
