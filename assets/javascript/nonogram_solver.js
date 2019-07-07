@@ -2,6 +2,7 @@
 const xDimension = document.getElementById('xDimension');
 const yDimension = document.getElementById('yDimension');
 const dimensionError = document.getElementById('dimensionError');
+const picture = document.getElementById('picture');
 
 
 // User inputs
@@ -22,6 +23,7 @@ const handleDimensionInput = e => {
     userInputs[e.target.id] = e.target.value;
     console.log(`Change userInputs to:`);
     console.log(userInputs);
+    updatePicture();
   } else {
     console.log(`Input is not a number`);
     dimensionError.innerText = "Invalid input! Only numbers allowed.";
@@ -29,5 +31,22 @@ const handleDimensionInput = e => {
   }
 }
 xDimension.onkeyup = handleDimensionInput;
+yDimension.onkeyup = handleDimensionInput;
 
-yDimension.onkeyup = handleDimensionInput
+// Function to redraw the picture grid
+function updatePicture() {
+  // First clear out the current picture
+  picture.innerHTML = "";
+
+  // Then iterate over rows and columns, creating elements along the way
+  for (rowY = 0; rowY < userInputs.yDimension; rowY++) {
+    let currRow = picture.appendChild(document.createElement('div'));
+    currRow.id = `pictureRow${rowY}`;
+    currRow.classList.add('picture-row');
+    for (colX = 0; colX < userInputs.xDimension; colX++) {
+      currCol = currRow.appendChild(document.createElement('div'));
+      currCol.id = `pictureCol${colX}`;
+      currCol.classList.add('element');
+    } 
+  }
+}
