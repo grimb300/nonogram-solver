@@ -86,3 +86,8 @@
 .hint-group:hover {
   background-color: red;
 }
+
+/* For now lets just hide the forms */
+form {
+  display: none;
+}

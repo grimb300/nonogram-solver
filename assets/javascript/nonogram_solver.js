@@ -23,16 +23,19 @@ const hintRow4 = document.getElementById('hint-row-4');
 const userInputs = {
   xSize: 5,
   ySize: 5,
-  colHints: [  ],
-  rowHints: [  ]
-  // colHints: [ [1, 2], [3, 4, 5], [6], [], [7, 8, 9, 10] ],
-  // rowHints: [ [1, 2], [3, 4, 5], [6], [], [7, 8, 9, 10] ]
+  // colHints: [  ],
+  // rowHints: [  ]
+  colHints: [ [3], [2, 2], [1, 1], [2, 2], [3] ],
+  rowHints: [ [3], [2, 2], [1, 1], [2, 2], [3] ]
 }
 console.log(`Initial userInputs:`);
 console.log(userInputs);
 
 // Initial puzzle draw
 drawPuzzle();
+
+// For now, lets just solve it
+solvePuzzle();
 
 // Catch when the user types a value into one of the size inputs
 const handleSizeInput = e => {
@@ -72,18 +75,12 @@ const handleHintInput = e => {
     drawColHints();
   }
 
-
-  // if(Number(e.target.value)) {
-  //   sizeError.innerText = "";
-  //   userInputs[e.target.id] = e.target.value;
-  //   console.log(`Change userInputs to:`);
-  //   console.log(userInputs);
-  //   drawPuzzle();
-  // } else {
-  //   console.log(`Input is not a number`);
-  //   sizeError.innerText = "Invalid input! Only numbers allowed.";
-  //   e.target.value = userInputs[e.target.id];
-  // }
+  // If all row and column hints are populated, solve!
+  if ((userInputs.rowHints.length == userInputs.xSize) &&
+      (userInputs.colHints.length == userInputs.ySize)) {
+    console.log('Solve!');
+    solvePuzzle();
+  }
 }
 hintCol0.onchange = handleHintInput;
 hintCol1.onchange = handleHintInput;
@@ -95,6 +92,65 @@ hintRow1.onchange = handleHintInput;
 hintRow2.onchange = handleHintInput;
 hintRow3.onchange = handleHintInput;
 hintRow4.onchange = handleHintInput;
+
+// Brute force solver
+function solvePuzzle() {
+  // Iterate across the hints trying all possible solutions
+  // Going to generate possible rows first since the data structures seem easier
+  for (row = 0; row < userInputs.ySize; row++) {
+    // Data structure holding the possible solutions
+    let possibleSolutions = [];
+
+    // Grab the hints for this row
+    let hints = userInputs.rowHints[row];
+
+    // Do the dumb thing first, packing the filled squares to the left, creating the base solution
+    let baseSolution = hints.map(x => '1'.repeat(x)).join('0');
+    // let baseSolution = hints.map(x => '1'.repeat(x)).join('0').padEnd(userInputs.xSize, '0');
+    // console.log(`baseSolution for row ${row}`);
+    // console.log(baseSolution);
+    
+    // If the base solution is the full width of the row, we're done
+    if (baseSolution.length == userInputs.xSize) {
+      // console.log(`Only one solution possible for this row`);
+      possibleSolutions.push(baseSolution);
+    } else {
+      // Need to figure out how to sprinkle the extra 0's in efficiently
+      let extraZeros = userInputs.xSize - baseSolution.length;
+      possibleSolutions.push(placeZeros(extraZeros, hints).map(x => x.padEnd(userInputs.xSize, '0')));
+    }
+    console.log(`possibleSolutions for row ${row}`);
+    console.log(possibleSolutions);
+  }
+}
+
+function placeZeros(zerosLeft, onesLeft) {
+  // console.log(`placeZeros called with ${zerosLeft}`);
+  // console.log(onesLeft);
+  let zerosPlaced;
+  let retStrings = [];
+  for (zerosPlaced = 0; zerosPlaced <= zerosLeft; zerosPlaced++) {
+    // console.log(`Placing ${zerosPlaced} zeros`);
+    let thisString = '0'.repeat(zerosPlaced).concat('', '1'.repeat(onesLeft[0]));
+    // console.log(`thisString is ${thisString}`);
+    if (onesLeft.length == 1) {
+      // End of the recursion, time to go back up
+      // console.log(`End of the recursion, pushing ${thisString}`);
+      retStrings.push(thisString);
+    } else {
+      // Keep on going down the rabbit hole
+      // console.log(`Going down the next level`);
+      let nextStrings = placeZeros((zerosLeft - zerosPlaced), onesLeft.slice(1));
+      let theseStrings = nextStrings.map(x => thisString.concat('0', x));
+      // console.log(`Pushing theseStrings`);
+      // console.log(theseStrings);
+      retStrings.push(theseStrings);
+    }
+  }
+  // console.log(`Returning`);
+  // console.log(retStrings.flat());
+  return retStrings.flat();
+}
 
 // Function to draw entire puzzle
 function drawPuzzle() {
@@ -110,12 +166,12 @@ function drawPuzzle() {
 // Function to redraw the column hints
 function drawColHints() {
   // First clear out the current hints
-  console.log('Clearing out column hints');
+  // console.log('Clearing out column hints');
   colHints.innerHTML = "";
 
   // Iterate over the hints, creating elements along the way
-  console.log('Starting column loop');
-  console.log(userInputs.colHints)
+  // console.log('Starting column loop');
+  // console.log(userInputs.colHints)
   for (col = 0; col < userInputs.xSize; col++) {
     let currCol = colHints.appendChild(document.createElement('div'));
     currCol.id = `hintsCol${col}`;
@@ -145,12 +201,12 @@ function drawColHints() {
 // Function to redraw the row hints
 function drawRowHints() {
   // First clear out the current hints
-  console.log('Clearing out row hints');
+  // console.log('Clearing out row hints');
   rowHints.innerHTML = "";
 
   // Iterate over the hints, creating elements along the way
-  console.log('Starting row loop');
-  console.log(userInputs.rowHints)
+  // console.log('Starting row loop');
+  // console.log(userInputs.rowHints)
   for (row = 0; row < userInputs.ySize; row++) {
     let currRow = rowHints.appendChild(document.createElement('div'));
     currRow.id = `hintsRow${row}`;
