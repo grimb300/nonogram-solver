@@ -5,6 +5,16 @@ const sizeError = document.getElementById('sizeError');
 const colHints = document.getElementById('column-hints');
 const rowHints = document.getElementById('row-hints');
 const picture = document.getElementById('picture');
+const hintCol0 = document.getElementById('hint-col-0');
+const hintCol1 = document.getElementById('hint-col-1');
+const hintCol2 = document.getElementById('hint-col-2');
+const hintCol3 = document.getElementById('hint-col-3');
+const hintCol4 = document.getElementById('hint-col-4');
+const hintRow0 = document.getElementById('hint-row-0');
+const hintRow1 = document.getElementById('hint-row-1');
+const hintRow2 = document.getElementById('hint-row-2');
+const hintRow3 = document.getElementById('hint-row-3');
+const hintRow4 = document.getElementById('hint-row-4');
 
 
 // User inputs
@@ -13,8 +23,10 @@ const picture = document.getElementById('picture');
 const userInputs = {
   xSize: 5,
   ySize: 5,
-  colHints: [ [1, 2], [3, 4, 5], [6], [], [7, 8, 9, 10] ],
-  rowHints: [ [1, 2], [3, 4, 5], [6], [], [7, 8, 9, 10] ]
+  colHints: [  ],
+  rowHints: [  ]
+  // colHints: [ [1, 2], [3, 4, 5], [6], [], [7, 8, 9, 10] ],
+  // rowHints: [ [1, 2], [3, 4, 5], [6], [], [7, 8, 9, 10] ]
 }
 console.log(`Initial userInputs:`);
 console.log(userInputs);
@@ -39,6 +51,50 @@ const handleSizeInput = e => {
 }
 xSize.onchange = handleSizeInput;
 ySize.onchange = handleSizeInput;
+
+// Catch when the user types a value into one of the size inputs
+const handleHintInput = e => {
+  console.log(`Saw input change to ${e.target.id}: ${e.target.value}`);
+
+  // Split the string on whitespace
+  let hints = e.target.value.split(' ').map(x => Number(x));
+  console.log(`Mapped hints`);
+  console.log(hints);
+
+  // Put the hints in the right array
+  let [dummy, direction, index] = e.target.id.split('-');
+  console.log(`Addding new values to ${direction} ${index}`);
+  if (direction == 'row') {
+    userInputs.rowHints[index] = hints;
+    drawRowHints();
+  } else {
+    userInputs.colHints[index] = hints;
+    drawColHints();
+  }
+
+
+  // if(Number(e.target.value)) {
+  //   sizeError.innerText = "";
+  //   userInputs[e.target.id] = e.target.value;
+  //   console.log(`Change userInputs to:`);
+  //   console.log(userInputs);
+  //   drawPuzzle();
+  // } else {
+  //   console.log(`Input is not a number`);
+  //   sizeError.innerText = "Invalid input! Only numbers allowed.";
+  //   e.target.value = userInputs[e.target.id];
+  // }
+}
+hintCol0.onchange = handleHintInput;
+hintCol1.onchange = handleHintInput;
+hintCol2.onchange = handleHintInput;
+hintCol3.onchange = handleHintInput;
+hintCol4.onchange = handleHintInput;
+hintRow0.onchange = handleHintInput;
+hintRow1.onchange = handleHintInput;
+hintRow2.onchange = handleHintInput;
+hintRow3.onchange = handleHintInput;
+hintRow4.onchange = handleHintInput;
 
 // Function to draw entire puzzle
 function drawPuzzle() {
