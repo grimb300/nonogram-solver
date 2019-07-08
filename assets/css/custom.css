@@ -81,3 +81,8 @@
 .element:hover {
   background-color: gray;
 }
+
+/* Hovering over a hint-group changes the background */
+.hint-group:hover {
+  background-color: red;
+}
