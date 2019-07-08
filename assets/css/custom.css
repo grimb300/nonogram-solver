@@ -1,3 +1,8 @@
+/* Size inputs */
+.size-input {
+  width: 35px;
+}
+
 /* Top-level puzzle layout */
 #puzzle {
   display: grid;
@@ -16,6 +21,7 @@
 #column-hints .hint-group {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
 }
 
 /* Row-hints is a flexbox column of flexbox rows */
@@ -26,6 +32,7 @@
 #row-hints .hint-group {
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
 }
 
 /* The picture is a flexbox column of flexbox rows */
@@ -64,6 +71,10 @@
 .element {
   margin: 1px;
   border: 1px solid black;
+}
+
+.element.blank {
+  border-color: white;
 }
 
 /* Hovering over an element changes the background */
