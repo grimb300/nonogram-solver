@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Nonogram Solver</title>
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+  <link rel="stylesheet" href="assets/css/custom.css">
+
+</head>
+<body>
+  <h1>Nonogram Solver</h1>
+
+  <h3>Puzzle Size:</h3>
+  <form action="get">
+    X: <input type="number" id="xSize" class="size-input" value=5>
+    Y: <input type="number" id="ySize" class="size-input" value=5>
+    <!-- <button id="create-puzzle">Create!</button> -->
+    <span id="sizeError"></span>
+  </form>
+
+  <h3>Puzzle:</h3>
+  <div id="puzzle">
+    <div id="column-hints" class="hints">
+      <div class="hint-group">
+        <div class="element">1</div>
+        <div class="element">2</div>
+      </div>
+      <div class="hint-group">
+        <div class="element">1</div>
+        <div class="element">2</div>
+      </div>
+    </div>
+    <div id="row-hints" class="hints">
+      <div class="hint-group">
+        <div class="element">1</div>
+        <div class="element">2</div>
+      </div>
+      <div class="hint-group">
+        <div class="element">1</div>
+        <div class="element">2</div>
+      </div>
+    </div>
+    <div id="picture">
+      <div class="picture-row">
+        <div class="element"></div>
+        <div class="element"></div>
+      </div>
+      <div class="picture-row">
+        <div class="element"></div>
+        <div class="element"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script type="text/javascript" src="assets/javascript/nonogram_solver.js"></script>
+</body>
+</html>

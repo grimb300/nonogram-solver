@@ -64,12 +64,12 @@ function drawColHints() {
     let currCol = colHints.appendChild(document.createElement('div'));
     currCol.id = `hintsCol${col}`;
     currCol.classList.add('hint-group');
-    console.log('Starting element loop');
-    console.log(userInputs.colHints[col]);
-    console.log(userInputs.colHints[col].length);
+    // console.log('Starting element loop');
+    // console.log(userInputs.colHints[col]);
+    // console.log(userInputs.colHints[col].length);
 
     // Special case if the column hints is an empty array
-    if (userInputs.colHints[col].length == 0) {
+    if (!userInputs.colHints[col] || userInputs.colHints[col].length == 0) {
       currHint = currCol.appendChild(document.createElement('div'));
       currHint.id = `hintCol${col}Blank`;
       currHint.classList.add('element', 'blank');
@@ -99,12 +99,12 @@ function drawRowHints() {
     let currRow = rowHints.appendChild(document.createElement('div'));
     currRow.id = `hintsRow${row}`;
     currRow.classList.add('hint-group');
-    console.log('Starting element loop');
-    console.log(userInputs.rowHints[row]);
-    console.log(userInputs.rowHints[row].length);
+    // console.log('Starting element loop');
+    // console.log(userInputs.rowHints[row]);
+    // console.log(userInputs.rowHints[row].length);
 
     // Special case if the row hints is an empty array
-    if (userInputs.rowHints[row].length == 0) {
+    if (!userInputs.rowHints[row] || userInputs.rowHints[row].length == 0) {
       currHint = currRow.appendChild(document.createElement('div'));
       currHint.id = `hintRow${row}Blank`;
       currHint.classList.add('element', 'blank');
